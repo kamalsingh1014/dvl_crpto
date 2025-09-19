@@ -2,9 +2,9 @@ name: KList DSL Debug Build & Firebase Distribution
 
 on:
   push:
-    branches: ["https://github.com/kamalsingh1014/dvl_crpto"]
+    branches: [ main , develop ]
   pull_request:
-    branches: [ "https://github.com/kamalsingh1014/dvl_crpto" ]
+    branches: [ main , develop ]
   workflow_dispatch:
 
 env:
