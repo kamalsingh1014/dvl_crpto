@@ -1,0 +1,57 @@
+name: KList DSL Debug Build & Firebase Distribution
+
+on:
+  push:
+    branches: ["https://github.com/kamalsingh1014/dvl_crpto"]
+  pull_request:
+    branches: [ "https://github.com/kamalsingh1014/dvl_crpto" ]
+  workflow_dispatch:
+
+env:
+  JAVA_VERSION: '17'
+
+jobs:
+  build-debug:
+    name: Build & Distribute Debug APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'temurin'
+
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+
+      - name: Make Gradlew Executable
+        run: chmod +x gradlew
+
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug
+
+      - name: Upload Debug APK (Artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: klist-dsl-debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 7
+
+      - name: Upload Debug APK to Firebase App Distribution
+        id: firebase-upload
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{ secrets.FIREBASE_APP_ID }}   # Firebase App ID
+          token: ${{ secrets.FIREBASE_TOKEN }}    # Firebase CLI token
+          groups: testers                         # Firebase tester group
+          file: app/build/outputs/apk/debug/app-debug.apk
+          releaseNotes: "Debug build from GitHub Actions 🚀"
