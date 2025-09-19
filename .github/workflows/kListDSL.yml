@@ -52,6 +52,6 @@ jobs:
         with:
           appId: ${{ secrets.FIREBASE_APP_ID }}   # Firebase App ID
           serviceCredentialsFileContent: ${{ secrets.FIREBASE_CREDENTIALS }} # Credential Key
-          groups: testers                         # Firebase tester group
+          groups: "USERS"                         # Firebase tester group
           file: app/build/outputs/apk/debug/app-debug.apk
           releaseNotes: "Debug build from GitHub Actions 🚀"
