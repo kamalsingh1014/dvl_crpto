@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1028808477072",
+    "project_id": "dvl-crypto",
+    "storage_bucket": "dvl-crypto.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028808477072:android:101e591699d4facb3fcb15",
+        "android_client_info": {
+          "package_name": "com.example.kamal_dvl"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9c14i-3kywXIP8nSUrp_XcNPE1MRy2iQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
